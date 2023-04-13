@@ -12,7 +12,6 @@ class TotalBillView: UIView {
         let label = UILabel()
         label.text = "Total Bill"
         label.textColor = #colorLiteral(red: 0.1882352941, green: 0.2235294118, blue: 0.2784313725, alpha: 1)
-        label.font = UIFont(name: "Avenir Next", size: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -23,7 +22,6 @@ class TotalBillView: UIView {
         textField.layer.cornerRadius = 10
         textField.textColor = .black
         textField.tintColor = .black
-        textField.font = UIFont(name: "Avenir Next Bold", size: 48)
         textField.textAlignment = .center
         textField.keyboardType = .numberPad
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -41,6 +39,12 @@ class TotalBillView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        titleLabel.font = UIFont(name: "Avenir Next", size: frame.width / 26.7)
+        sumTextField.font = UIFont(name: "Avenir Next Bold", size: frame.height / 2.6)
+    }
+    
     func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
@@ -51,11 +55,12 @@ class TotalBillView: UIView {
         NSLayoutConstraint.activate([
         titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 0),
         titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+        titleLabel.heightAnchor.constraint(equalToConstant: 20),
         
         sumTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 2),
         sumTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
         sumTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-        sumTextField.heightAnchor.constraint(equalToConstant: 100)
+        sumTextField.bottomAnchor.constraint(equalTo: bottomAnchor,constant: 0)
         ])
     }
 }
